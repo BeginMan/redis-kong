@@ -2,17 +2,17 @@ local BasePlugin = require "kong.plugins.base_plugin"
 local responses = require "kong.tools.responses"
 local constants = require "kong.constants"
 
-local AxHandler = BasePlugin:extend()
+local RedHandler = BasePlugin:extend()
 local set_header = ngx.req.set_header
 local get_headers = ngx.req.get_headers
 
 
-function AxHandler:new()
-  AxHandler.super.new(self, "ax")
+function RedHandler:new()
+  RedHandler.super.new(self, "ax")
 end
 
-function AxHandler:access(conf)
-  AxHandler.super.access(self)
+function RedHandler:access(conf)
+  RedHandler.super.access(self)
 
   local key
   local headers = get_headers()
@@ -50,4 +50,4 @@ function AxHandler:access(conf)
   ngx.ctx.authenticated_credential = res
 end
 
-return AxHandler
+return RedHandler
